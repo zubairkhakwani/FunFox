@@ -1,4 +1,6 @@
+using FunFox.Business.Requests.User;
 using FunFox.Data.Extension;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,8 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddFunFoxDatabase(connectionString);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterRequest).GetTypeInfo().Assembly));
+
 
 var app = builder.Build();
 

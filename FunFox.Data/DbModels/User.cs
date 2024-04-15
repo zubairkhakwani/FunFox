@@ -21,5 +21,7 @@ namespace FunFox.Data.DbModels
         [ForeignKey(nameof(Role))]
         public int RoleId { get; set; }
         public Role Role { get; set; } = null!;
+
+        public Student? Student { get; set; }
     }
 }
