@@ -20,5 +20,7 @@ namespace FunFox.Data.DbModels
         public int Level { get; set; }
 
         public User User { get; set; } = null!;
+
+        public List<StudentClasses> StudentClasses { get; set; }
     }
 }

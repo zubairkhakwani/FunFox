@@ -1,0 +1,53 @@
+﻿using FunFox.Business.Enums;
+using FunFox.Business.Requests.Class;
+using FunFox.Business.Requests.Shared;
+using FunFox.Data;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace FunFox.Business.RequestHandlers.Class
+{
+    public class GetClassesRequestHandler : IRequestHandler<GetClassesRequest, PageableResponse<GetClassesResponse>>
+    {
+        private readonly FunFoxDbContext dbContext;
+
+        public GetClassesRequestHandler(FunFoxDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        public async Task<PageableResponse<GetClassesResponse>> Handle(GetClassesRequest request, CancellationToken cancellationToken)
+        {
+            var query = dbContext
+                .Classes
+                .Include(c => c.StudentClasses)
+                .ThenInclude(sc => sc.Student)
+                .Where(c =>
+                    (string.IsNullOrWhiteSpace(request.Keyword) || c.Title.Contains(request.Keyword) || c.Level.ToString() == request.Keyword)
+                );
+
+            var totalRecords = query.Count();
+
+            var data = await query
+            .Select(c => new GetClassesResponse
+            {
+                Id = c.Id,
+                Level = (ClassLevel)c.Level,
+                Title = c.Title,
+                ClassFrom = c.ClassFrom,
+                ClassSize = c.ClassSize,
+                ClassTo = c.ClassTo,
+                CreatedAt = c.CreatedAt,
+                DetailHTML = c.DetailHTML,
+                Image = c.Image,
+                IsActive = c.IsActive,
+                StudentCount = c.StudentClasses.Count,
+            })
+            .Skip((request.PageNo - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync();
+
+            return new PageableResponse<GetClassesResponse>(data, request.PageNo, request.PageSize, totalRecords, totalRecords / request.PageSize);
+        }
+    }
+}
