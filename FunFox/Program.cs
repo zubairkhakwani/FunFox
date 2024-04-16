@@ -1,5 +1,7 @@
 using FunFox.Business.Requests.User;
+using FunFox.Business.Services.Contracts;
 using FunFox.Data.Extension;
+using FunFox.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
@@ -15,6 +17,7 @@ builder.Services.AddFunFoxDatabase(connectionString);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterRequest).GetTypeInfo().Assembly));
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IIdentityUser, IdentityUser>();
 
 builder.Services.AddAuthentication(options =>
 {

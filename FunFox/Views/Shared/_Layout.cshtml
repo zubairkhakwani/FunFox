@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using FunFox.Business.Services.Contracts
+@inject IIdentityUser IdentityUser;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,8 +32,16 @@
                     </ul>
 
                     <div>
-                        <a href="/auth/login" class="btn" style="background-color: #EE4462" type="submit">Login</a>
-                        <a href="/auth/register" class="btn" style="background-color:#F38E3D" type="submit">Register</a>
+                        @if (IdentityUser.IsAuthenticated)
+                        {
+                            <p>Welcome @IdentityUser.Name</p>
+                        }
+                        else
+                        {
+                            <a href="/auth/login" class="btn" style="background-color: #EE4462" type="submit">Login</a>
+                            <a href="/auth/register" class="btn" style="background-color:#F38E3D" type="submit">Register</a>
+                        }
+
                     </div>
                 </div>
             </div>
