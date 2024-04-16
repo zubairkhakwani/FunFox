@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunFox", "FunFox\FunFox.csproj", "{F46645F7-6D0B-4759-A988-56BB30BD3B6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunFox", "FunFox\FunFox.csproj", "{F46645F7-6D0B-4759-A988-56BB30BD3B6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunFox.Business", "FunFox.Business\FunFox.Business.csproj", "{D8A9AD7A-092F-4563-B238-E7D56CCA0CD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunFox.Business", "FunFox.Business\FunFox.Business.csproj", "{D8A9AD7A-092F-4563-B238-E7D56CCA0CD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunFox.Data", "FunFox.Data\FunFox.Data.csproj", "{F24F700E-37C6-4ECD-8DCB-5C3ABB839507}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunFox.Data", "FunFox.Data\FunFox.Data.csproj", "{F24F700E-37C6-4ECD-8DCB-5C3ABB839507}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
