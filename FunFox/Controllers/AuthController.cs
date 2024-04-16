@@ -1,4 +1,5 @@
-﻿using FunFox.Business.Requests.User;
+﻿using FunFox.Business.Enums;
+using FunFox.Business.Requests.User;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -77,7 +78,9 @@ namespace FunFox.Controllers
             new ClaimsPrincipal(claimsIdentity),
             authProperties);
 
-            return Redirect("/");
+            var redirectURL = response.Role == Roles.Admin.ToString() ? "/admin/classes" : "/";
+
+            return Redirect(redirectURL);
         }
 
         [HttpPost("logout")]
