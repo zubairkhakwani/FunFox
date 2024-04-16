@@ -63,6 +63,8 @@ namespace FunFox.Controllers
 
             var claims = GetClaims(response);
 
+            //httpcontext.signinasync
+
             var claimsIdentity = new ClaimsIdentity(
             claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -74,6 +76,14 @@ namespace FunFox.Controllers
             CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity),
             authProperties);
+
+            return Redirect("/");
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await httpContextAccessor.HttpContext.SignOutAsync();
 
             return Redirect("/");
         }

@@ -34,12 +34,18 @@
                     <div>
                         @if (IdentityUser.IsAuthenticated)
                         {
-                            <p>Welcome @IdentityUser.Name</p>
+                            <div style="display: flex; gap: 10px">
+                                <p>Welcome @IdentityUser.Name</p>
+
+                                <form action="/auth/logout" method="post">
+                                    <button type="submit" class="btn" style="background-color: #EE4462">Logout</button>
+                                </form>
+                            </div>
                         }
                         else
                         {
-                            <a href="/auth/login" class="btn" style="background-color: #EE4462" type="submit">Login</a>
-                            <a href="/auth/register" class="btn" style="background-color:#F38E3D" type="submit">Register</a>
+                            <a href="/auth/login" class="btn" style="background-color: #EE4462">Login</a>
+                            <a href="/auth/register" class="btn" style="background-color:#F38E3D">Register</a>
                         }
 
                     </div>
