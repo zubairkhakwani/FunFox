@@ -1,7 +1,9 @@
 ﻿using FunFox.Business.Requests.User;
-using FunFox.Data.DbModels;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FunFox.Controllers
 {
@@ -9,10 +11,12 @@ namespace FunFox.Controllers
     public class AuthController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AuthController(IMediator mediator)
+        public AuthController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             this.mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet("register")]
@@ -50,14 +54,40 @@ namespace FunFox.Controllers
             }
 
             var response = await mediator.Send(request);
-            
+
             if(!response.Success)
             {
                 ModelState.AddModelError("login-error", response.Message);
                 return View();
             }
 
+            var claims = GetClaims(response);
+
+            var claimsIdentity = new ClaimsIdentity(
+            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties();
+            authProperties.ExpiresUtc = DateTime.UtcNow.AddDays(5);
+            authProperties.IsPersistent = true;
+
+            await httpContextAccessor.HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(claimsIdentity),
+            authProperties);
+
             return Redirect("/");
+        }
+
+        private IEnumerable<Claim> GetClaims(LoginResponse model)
+        {
+            List<Claim> claims = new Claim[] {
+                new Claim(ClaimTypes.Name, model.Name),
+                new Claim(ClaimTypes.Email, model.Email),
+                new Claim(ClaimTypes.Role, model.Role),
+                new Claim("Level", model.Level.ToString())
+            }.ToList();
+
+            return claims;
         }
     }
 }

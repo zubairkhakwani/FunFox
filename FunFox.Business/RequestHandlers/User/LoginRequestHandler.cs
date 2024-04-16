@@ -1,4 +1,5 @@
-﻿using FunFox.Business.Requests.User;
+﻿using FunFox.Business.Enums;
+using FunFox.Business.Requests.User;
 using FunFox.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace FunFox.Business.RequestHandlers.User
             var user = await dbContext
                 .Users
                 .Include(u => u.Student)
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(u => u.Email.ToLower() == request.Email.ToLower() && u.Password == request.Password);
 
             if(user == null)
@@ -31,7 +33,15 @@ namespace FunFox.Business.RequestHandlers.User
                 return new LoginResponse { Success = false, Message = "Invalid credentials" };
             }
 
-            return new LoginResponse { Success = true, Message = "Login success" };
+            return new LoginResponse { 
+                Success = true,
+                Message = "Login success",
+                Id = user.Id,
+                Email = user.Email,
+                Level = user.Role.Name == Roles.Student.ToString() ? (ClassLevel)user.Student.Level : null,
+                Name = user.Name,
+                Role = user.Role.Name
+            };
         }
     }
 }
