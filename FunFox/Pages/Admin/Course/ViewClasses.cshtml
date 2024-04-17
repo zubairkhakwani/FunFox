@@ -16,6 +16,8 @@
                 <th scope="col">Title</th>
                 <th scope="col">Class Size</th>
                 <th scope="col">Student Count</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Created At</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +30,8 @@
                          <td>@record.Title</td>
                          <td>@record.ClassSize</td>
                          <td>@record.StudentCount</td>
+                        <td>@record.CreatedBy</td>
+                        <td>@record.CreatedAt.ToString("F")</td>
                      </tr>
                  }
             }

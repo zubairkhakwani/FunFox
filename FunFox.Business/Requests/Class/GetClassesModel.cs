@@ -24,6 +24,7 @@ namespace FunFox.Business.Requests.Class
         public ClassLevel Level { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; }
 
         public int StudentCount { get; set; }
     }

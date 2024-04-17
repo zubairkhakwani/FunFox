@@ -21,6 +21,7 @@ namespace FunFox.Business.RequestHandlers.Class
             var query = dbContext
                 .Classes
                 .Include(c => c.StudentClasses)
+                .Include(c => c.CreatedBy)
                 .ThenInclude(sc => sc.Student)
                 .Where(c =>
                     (string.IsNullOrWhiteSpace(request.Keyword) || c.Title.Contains(request.Keyword) || c.Level.ToString() == request.Keyword)
@@ -38,6 +39,7 @@ namespace FunFox.Business.RequestHandlers.Class
                 ClassSize = c.ClassSize,
                 ClassTo = c.ClassTo,
                 CreatedAt = c.CreatedAt,
+                CreatedBy = c.CreatedBy.Name,
                 DetailHTML = c.DetailHTML,
                 Image = c.Image,
                 IsActive = c.IsActive,
