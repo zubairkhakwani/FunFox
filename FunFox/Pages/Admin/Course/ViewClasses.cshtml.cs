@@ -3,6 +3,7 @@ using FunFox.Business.Requests.Class;
 using FunFox.Business.Requests.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FunFox.Pages.Admin.Course
@@ -12,6 +13,10 @@ namespace FunFox.Pages.Admin.Course
     {
         private readonly IMediator mediator;
         public PageableResponse<GetClassesResponse> PageableResponse { get; set; }
+
+        [FromQuery(Name = "msg")]
+        public string Message { get; set; }
+
 
         public ViewClassesModel(IMediator mediator)
         {

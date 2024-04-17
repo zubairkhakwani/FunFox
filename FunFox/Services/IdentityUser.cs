@@ -16,12 +16,14 @@ namespace FunFox.Services
                 return;
             }
 
+            var idClaim = httpContext.User.FindFirst("Id");
             var nameClaim = httpContext.User.FindFirst(ClaimTypes.Name);
             var emailClaim = httpContext.User.FindFirst(ClaimTypes.Email);
             var roleClaim = httpContext.User.FindFirst(ClaimTypes.Role);
             var levelClaim = httpContext.User.FindFirst("Level");
 
             IsAuthenticated = true;
+            Id = Convert.ToInt32(idClaim?.Value);
             Name = nameClaim?.Value;
             Email = emailClaim?.Value;
             Role = roleClaim?.Value;
@@ -35,6 +37,7 @@ namespace FunFox.Services
         }
 
         public bool IsAuthenticated { get; private set; }
+        public int Id { get; private set; }
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Role { get; private set; }

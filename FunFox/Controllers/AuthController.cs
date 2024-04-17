@@ -94,6 +94,7 @@ namespace FunFox.Controllers
         private IEnumerable<Claim> GetClaims(LoginResponse model)
         {
             List<Claim> claims = new Claim[] {
+                new Claim("Id", model.Id.ToString()),
                 new Claim(ClaimTypes.Name, model.Name),
                 new Claim(ClaimTypes.Email, model.Email),
                 new Claim(ClaimTypes.Role, model.Role),
