@@ -1,4 +1,5 @@
-﻿@using FunFox.Business.Services.Contracts
+﻿@using FunFox.Business.Enums
+@using FunFox.Business.Services.Contracts
 @inject IIdentityUser IdentityUser;
 
 <!DOCTYPE html>
@@ -34,8 +35,13 @@
                     <div>
                         @if (IdentityUser.IsAuthenticated)
                         {
-                            <div style="display: flex; gap: 10px">
-                                <p>Welcome @IdentityUser.Name</p>
+                            <div style="display: flex; gap: 10px; align-items: center">
+                                <p style="margin:0">Welcome: @IdentityUser.Name</p>
+
+                                @if(IdentityUser.IsInRole(Roles.Admin.ToString()))
+                                {
+                                    <a class="btn" style="background-color:#F38E3D" href="/admin/classes">Admin Panel</a>
+                                }
 
                                 <form action="/auth/logout" method="post">
                                     <button type="submit" class="btn" style="background-color: #EE4462">Logout</button>
