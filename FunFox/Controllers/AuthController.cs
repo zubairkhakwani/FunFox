@@ -101,6 +101,11 @@ namespace FunFox.Controllers
                 new Claim("Level", model.Level.ToString())
             }.ToList();
 
+            if(model.StudentId != null)
+            {
+                claims.Add(new Claim("StudentId", model.StudentId.ToString()));
+            }
+
             return claims;
         }
     }

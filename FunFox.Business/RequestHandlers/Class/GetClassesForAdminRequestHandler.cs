@@ -7,16 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FunFox.Business.RequestHandlers.Class
 {
-    public class GetClassesRequestHandler : IRequestHandler<GetClassesRequest, PageableResponse<GetClassesResponse>>
+    public class GetClassesForAdminRequestHandler : IRequestHandler<GetClassesForAdminRequest, PageableResponse<GetClassesForAdminResponse>>
     {
         private readonly FunFoxDbContext dbContext;
 
-        public GetClassesRequestHandler(FunFoxDbContext dbContext)
+        public GetClassesForAdminRequestHandler(FunFoxDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task<PageableResponse<GetClassesResponse>> Handle(GetClassesRequest request, CancellationToken cancellationToken)
+        public async Task<PageableResponse<GetClassesForAdminResponse>> Handle(GetClassesForAdminRequest request, CancellationToken cancellationToken)
         {
             var query = dbContext
                 .Classes
@@ -30,8 +30,7 @@ namespace FunFox.Business.RequestHandlers.Class
             var totalRecords = query.Count();
 
             var data = await query
-                .Where(c => c.IsActive)
-            .Select(c => new GetClassesResponse
+            .Select(c => new GetClassesForAdminResponse
             {
                 Id = c.Id,
                 Level = (ClassLevel)c.Level,
@@ -40,16 +39,17 @@ namespace FunFox.Business.RequestHandlers.Class
                 ClassSize = c.ClassSize,
                 ClassTo = c.ClassTo,
                 CreatedAt = c.CreatedAt,
+                CreatedBy = c.CreatedBy.Name,
                 DetailHTML = c.DetailHTML,
                 Image = c.Image,
+                IsActive = c.IsActive,
                 StudentCount = c.StudentClasses.Count,
-                AlreadyEnrolled = request.StudentId == null ? false : c.StudentClasses.Any(sc => sc.StudentId == request.StudentId)
             })
             .Skip((request.PageNo - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync();
 
-            return new PageableResponse<GetClassesResponse>(data, request.PageNo, request.PageSize, totalRecords, totalRecords / request.PageSize);
+            return new PageableResponse<GetClassesForAdminResponse>(data, request.PageNo, request.PageSize, totalRecords, totalRecords / request.PageSize);
         }
     }
 }

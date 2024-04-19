@@ -12,7 +12,7 @@ namespace FunFox.Pages.Admin.Course
     public class ViewClassesModel : PageModel
     {
         private readonly IMediator mediator;
-        public PageableResponse<GetClassesResponse> PageableResponse { get; set; }
+        public PageableResponse<GetClassesForAdminResponse> PageableResponse { get; set; }
 
         [FromQuery(Name = "msg")]
         public string Message { get; set; }
@@ -25,7 +25,7 @@ namespace FunFox.Pages.Admin.Course
 
         public async Task OnGet()
         {
-            PageableResponse = await mediator.Send(new GetClassesRequest { });
+            PageableResponse = await mediator.Send(new GetClassesForAdminRequest { });
 
         }
     }

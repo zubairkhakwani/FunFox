@@ -1,15 +1,17 @@
-﻿using FunFox.Business.Enums;
-using FunFox.Business.Requests.Shared;
+﻿using FunFox.Business.Requests.Shared;
 using MediatR;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using FunFox.Business.Enums;
 
 namespace FunFox.Business.Requests.Class
 {
-    public class GetClassesRequest : PageableRequest, IRequest<PageableResponse<GetClassesResponse>>
+    public class GetClassesForAdminRequest : PageableRequest, IRequest<PageableResponse<GetClassesForAdminResponse>>
     {
-        public int? StudentId { get; set; }
+
     }
 
-    public class GetClassesResponse
+    public class GetClassesForAdminResponse
     {
         public int Id { get; set; }
 
@@ -20,8 +22,9 @@ namespace FunFox.Business.Requests.Class
         public TimeOnly ClassTo { get; set; }
         public int ClassSize { get; set; }
         public ClassLevel Level { get; set; }
+        public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
-        public bool AlreadyEnrolled { get; set; }
+        public string CreatedBy { get; set; }
 
         public int StudentCount { get; set; }
     }

@@ -17,13 +17,17 @@ namespace FunFox.Services
             }
 
             var idClaim = httpContext.User.FindFirst("Id");
+            var studentIdClaim = httpContext.User.FindFirst("StudentId");
             var nameClaim = httpContext.User.FindFirst(ClaimTypes.Name);
             var emailClaim = httpContext.User.FindFirst(ClaimTypes.Email);
             var roleClaim = httpContext.User.FindFirst(ClaimTypes.Role);
             var levelClaim = httpContext.User.FindFirst("Level");
 
+            var studentIdExist = int.TryParse(studentIdClaim?.Value, out int studentId);
+
             IsAuthenticated = true;
             Id = Convert.ToInt32(idClaim?.Value);
+            StudentId = studentIdExist ? studentId : null;
             Name = nameClaim?.Value;
             Email = emailClaim?.Value;
             Role = roleClaim?.Value;
@@ -38,6 +42,8 @@ namespace FunFox.Services
 
         public bool IsAuthenticated { get; private set; }
         public int Id { get; private set; }
+        public int? StudentId { get; private set; }
+
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Role { get; private set; }

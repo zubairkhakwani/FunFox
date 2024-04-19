@@ -6,6 +6,7 @@ namespace FunFox.Business.Services.Contracts
     {
         bool IsAuthenticated { get; }
         int Id { get;}
+        int? StudentId { get;}
         string Name { get; }
         string Email { get;}
         string Role { get; }

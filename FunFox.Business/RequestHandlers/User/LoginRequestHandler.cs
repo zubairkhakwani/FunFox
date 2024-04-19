@@ -37,6 +37,7 @@ namespace FunFox.Business.RequestHandlers.User
                 Success = true,
                 Message = "Login success",
                 Id = user.Id,
+                StudentId = user.Student?.Id,
                 Email = user.Email,
                 Level = user.Role.Name == Roles.Student.ToString() ? (ClassLevel)user.Student.Level : null,
                 Name = user.Name,
