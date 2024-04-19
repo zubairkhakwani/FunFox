@@ -1,37 +1,22 @@
 ﻿@model PageableResponse<GetClassesResponse>
 
-<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<div style="display: flex">
+    <div>
+        <h2 class="main-small-heading" style="margin-bottom: 26px; padding-top:3rem!important">
+            Welcome to FunFox
+        </h2>
+        <h1 class="main-heading" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+            Educational programs that spark a lifelong love of 
+            <span class="reverse-heading-color">learning <img src="https://www.funfoxprogram.com.au/Themes/WristwearTheme/Content/images/online-tutoring-for-primary-school.jpg" alt="line"></span>
+        </h1>
+    </div>
+    <div>
+        <img style="width: 600px" src="https://www.funfoxprogram.com.au/Themes/WristwearTheme/Content/images/home-gif.gif" alt="banner">
+    </div>
+</div>
 
-    @foreach (var cls in Model.Records)
-    {
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="@cls.Image" class="img-fluid rounded-start">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body" style="position: relative; height:100%">
-                <h5 class="card-title">@cls.Title</h5>
-                <p class="card-text">@cls.DetailHTML</p>
-                <p class="card-text"><small class="text-muted">Monday - Friday from @cls.ClassFrom - @cls.ClassTo</small></p>
-                <div style="display:flex; gap: 10px; flex-wrap: wrap; position: absolute; bottom: 10px">
-                    @if(cls.AlreadyEnrolled)
-                    {
-                        <button class="btn btn-primary">Already Enrolled</button>
-                    }
-                    else
-                    {
-                        <form action="/class/enroll?courseId=@cls.Id" method="post">
-                            <button type="submit" disabled="@(cls.StudentCount >= cls.ClassSize ? true : false)" title="@(cls.StudentCount >= cls.ClassSize ? "Class size is full" : "")" class="btn btn-primary">Enroll Now</button>
-                        </form>
-                    }
-                    <button class="btn btn-secondary">View Detail</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-    }
-
+<div style="text-align:center; margin-top: 40px">
+    <h2 class="main-small-heading">Online tutoring in Australia…</h2>
+    <h2 class="main-heading" style="padding-bottom: 8px;"> with a difference</h2>
+    <h4 style="color:black;">Forget the traditional tutoring model. FunFox is so much more than that. Our small-group classes are led by teachers rigorously trained in the FunFox Way to help students excel at primary school and beyond. Aligned with the Australian curriculum and suitable for students from all over the world, our classes are interactive, fun and deliver the kind of growth you’re looking for. Are you ready to join the FunFox family?</h4>
 </div>
