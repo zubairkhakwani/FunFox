@@ -19,9 +19,20 @@ namespace FunFox.Controllers
             this.mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            int? studentId = identityUser.IsAuthenticated ? identityUser.StudentId : null;
+
+            var getClassesRequest = new GetClassesRequest { PageNo = 1, PageSize = 50, StudentId = studentId };
+            var response = await mediator.Send(getClassesRequest);
+
+            return View(response);
+        }
+
         [HttpPost("Enroll")]
         [Authorize(Roles = nameof(Roles.Student))]
-        public async Task<IActionResult> Index([FromQuery] int courseId)
+        public async Task<IActionResult> Enroll([FromQuery] int courseId)
         {
             var enrollenmentRequest = new EnrollenmentRequest { CourseId = courseId, StudentId = identityUser.StudentId.Value};
             var response = await mediator.Send(enrollenmentRequest);
