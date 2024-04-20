@@ -1,0 +1,87 @@
+﻿@page "/admin/class/edit/{id:int}"
+
+@model FunFox.Pages.Admin.Course.EditClassModel
+
+<h3 style="text-align: center; margin-bottom : 35px">Edit class</h3>
+
+
+@if (ViewData["error"] != null)
+{
+    <div style="color:red">
+        <span>@ViewData["error"]</span>
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <input asp-for="Model.Id" class="form-control" type="hidden" />
+
+    <div class="row mb-4">
+
+        <div class="col">
+            <div data-mdb-input-init class="form-outline">
+                <label class="form-label" asp-for="Model.Title">Class Title</label>
+                <input type="text" asp-for="Model.Title" class="form-control" />
+                <span asp-validation-for="Model.Title" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div data-mdb-input-init class="form-outline">
+                <label class="form-label" asp-for="Model.ClassFrom">Clas From (Time)</label>
+                <input type="time" asp-for="Model.ClassFrom" class="form-control" />
+                <span asp-validation-for="Model.ClassFrom" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col">
+            <div data-mdb-input-init class="form-outline">
+                <label class="form-label" asp-for="Model.ClassTo">Class Till (Time)</label>
+                <input type="time" asp-for="Model.ClassTo" class="form-control" />
+                <span asp-validation-for="Model.ClassTo" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div data-mdb-input-init class="form-outline">
+                <label class="form-label" asp-for="Model.DetailHTML">Class Detail</label>
+                <textarea asp-for="Model.DetailHTML" class="form-control" rows="7">
+                </textarea>
+                <span asp-validation-for="Model.DetailHTML" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div data-mdb-input-init class="form-outline">
+                <label class="form-label" asp-for="Model.ClassSize">Class Size</label>
+                <input type="number" asp-for="Model.ClassSize" class="form-control" />
+                <span asp-validation-for="Model.ClassSize" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col">
+            <div data-mdb-input-init class="form-outline">
+                <label class="form-label" asp-for="Model.Level">Level</label>
+
+                <select asp-for="Model.Level" class="form-select" disabled>
+                    <option selected>Open this select menu</option>
+                    <option value="1">Kindergarten</option>
+                    <option value="2">ElementarySchool</option>
+                    <option value="3">MiddleSchool</option>
+                    <option value="4">HighSchool</option>
+                </select>
+                <span asp-validation-for="Model.Level" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Submit button -->
+    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Edit</button>
+</form>

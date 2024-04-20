@@ -47,6 +47,7 @@ namespace FunFox.Business.RequestHandlers.Class
             })
             .Skip((request.PageNo - 1) * request.PageSize)
             .Take(request.PageSize)
+            .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
 
             return new PageableResponse<GetClassesForAdminResponse>(data, request.PageNo, request.PageSize, totalRecords, totalRecords / request.PageSize);

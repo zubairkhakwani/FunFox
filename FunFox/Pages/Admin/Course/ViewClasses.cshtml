@@ -22,6 +22,7 @@
                 <th scope="col">Student Count</th>
                 <th scope="col">Created By</th>
                 <th scope="col">Created At</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -36,13 +37,19 @@
                          <td>@record.StudentCount</td>
                         <td>@record.CreatedBy</td>
                         <td>@record.CreatedAt.ToString("F")</td>
+                        <td>
+                            <a href="/admin/class/edit/@record.Id">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                      </tr>
                  }
             }
             else
             {
                 <tr>
-                    <td colspan="4" style="text-align: center">No Record Found</td>
+                    <td colspan="5" style="text-align: center">No Record Found</td>
                 </tr>
             }
         </tbody>
