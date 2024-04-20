@@ -38,7 +38,7 @@
                         <td>@record.CreatedBy</td>
                         <td>@record.CreatedAt.ToString("F")</td>
                         <td>
-                            <div style="display: flex; gap: 10px">
+                            <div style="display: flex; gap: 10px; align-items: center">
                                 <a href="/admin/class/edit/@record.Id">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
@@ -47,6 +47,7 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
+                                <i title="view enrolled students" class="fa-regular fa-eye" onclick="ViewEnrolledStudents(@record.Id)" data-bs-toggle="modal" data-bs-target="#myModal"></i>
                             </div>
                         </td>
                      </tr>
@@ -60,6 +61,46 @@
             }
         </tbody>
     </table>
+</div>
+
+<div class="container">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header float-right">
+                <h5>Students Enrolled</h5>
+                <div class="text-right">
+                    <i data-dismiss="modal" aria-label="Close" class="fa fa-close"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div style="overflow: scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">Student Email</th>
+                                <th scope="col">Enrolled At</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Final Amount</th>
+                                <th scope="col">Transaction Id</th>
+                                <th scope="col">Payment Gateway</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-table-body">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
 </div>
 
 
@@ -79,6 +120,52 @@
             });
 
             return false;
+        }
+
+
+        async function ViewEnrolledStudents(id)
+        {
+            var getStudentListUrl = `/class/${id}/enrolled`;
+            debugger;
+
+            var response;
+            try {
+               var data = {};
+                response = await AjaxRequest("POST", getStudentListUrl, data);
+                var table = GetTable(response);
+
+                document.getElementById("modal-table-body").innerHTML = table;
+
+                
+            // Success
+            }
+            catch (ex) {
+               //Reponse Failed
+            }
+        }
+
+        function GetTable(enrolledStudents)
+        {
+            var rows = '';
+
+            for (var i = 0; i < enrolledStudents.length; i++)
+            {
+                var studentDetail = enrolledStudents[i];
+
+                rows += `<tr>
+                            <td scope="row">${studentDetail.studentId}</td>
+                            <td> ${studentDetail.studentName} </td>
+                            <td>${studentDetail.studentEmail}</td>
+                            <td>${studentDetail.enrolledAt}</td>
+                            <td>${studentDetail.totalAmount}</td>
+                            <td>${studentDetail.discount}</td>
+                            <td>${studentDetail.finalAmount}</td>
+                            <td>${studentDetail.transactionId}</td>
+                            <td>${studentDetail.paymentGateway}</td>
+                            </tr>`;
+            }
+
+            return rows;
         }
     </script>
 }

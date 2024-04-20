@@ -1,5 +1,6 @@
 ﻿using FunFox.Business.Enums;
 using FunFox.Business.Requests.Class;
+using FunFox.Business.Requests.Students;
 using FunFox.Business.Services.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -47,6 +48,15 @@ namespace FunFox.Controllers
             var response = await mediator.Send(new DeleteClassRequest { Id = classId });
 
             return Redirect($"/admin/classes?{(response.Success ? "msg" : "err")}={response.Message}");
+        }
+
+        [HttpPost("{classId:int}/enrolled")]
+        [Authorize(Roles = nameof(Roles.Admin))]
+        public async Task<List<ClassEnrolledStudentsResponse>> ClassEnrolleldStudent(int classId)
+        {
+            var response = await mediator.Send(new ClassEnrolledStudentsRequest { ClassId = classId });
+
+            return response;
         }
     }
 }
