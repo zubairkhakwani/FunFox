@@ -7,6 +7,7 @@ namespace FunFox.Business.Requests.Class
     public class GetClassesRequest : PageableRequest, IRequest<PageableResponse<GetClassesResponse>>
     {
         public int? StudentId { get; set; }
+        public int? Id { get; set; }
     }
 
     public class GetClassesResponse

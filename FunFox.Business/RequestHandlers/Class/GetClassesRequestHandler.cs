@@ -24,6 +24,8 @@ namespace FunFox.Business.RequestHandlers.Class
                 .Include(c => c.CreatedBy)
                 .ThenInclude(sc => sc.Student)
                 .Where(c =>
+                    (request.Id == null || c.Id == request.Id.Value)
+                    &&
                     (string.IsNullOrWhiteSpace(request.Keyword) || c.Title.Contains(request.Keyword) || c.Level.ToString() == request.Keyword)
                 );
 
