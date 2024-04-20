@@ -38,7 +38,7 @@ namespace FunFox.Controllers
             var enrollenmentRequest = new EnrollenmentRequest { CourseId = courseId, StudentId = identityUser.StudentId.Value };
             var response = await mediator.Send(enrollenmentRequest);
 
-            return Redirect($"/?{(response.Success ? "msg" : "err")}={response.Message}");
+            return Redirect($"/Class?{(response.Success ? "msg" : "err")}={response.Message}");
         }
 
         [HttpPost("Delete/{classId}")]

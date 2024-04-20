@@ -3,6 +3,7 @@ using FunFox.Data;
 using FunFox.Data.DbModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FunFox.Business.RequestHandlers.Class
 {
@@ -17,6 +18,17 @@ namespace FunFox.Business.RequestHandlers.Class
 
         public async Task<EnrollenmentResponse> Handle(EnrollenmentRequest request, CancellationToken cancellationToken)
         {
+            int? maxClassSize = (await dbContext.Classes.FirstOrDefaultAsync(c => c.Id == request.CourseId))?.ClassSize;
+
+            var enrolledStudents = await dbContext.StudentClasses
+                .Where(sc => sc.ClassId == request.CourseId)
+                .ToListAsync();
+
+            if(enrolledStudents.Count() >= maxClassSize)
+            {
+                return new EnrollenmentResponse { Success = false, Message = "Class size is full" };
+            }
+
             var dbRequest = new StudentClasses
             {
                 ClassId = request.CourseId,
