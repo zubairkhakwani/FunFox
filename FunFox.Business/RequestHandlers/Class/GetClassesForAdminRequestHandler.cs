@@ -30,6 +30,7 @@ namespace FunFox.Business.RequestHandlers.Class
             var totalRecords = query.Count();
 
             var data = await query
+                .Where(c => c.IsActive)
             .Select(c => new GetClassesForAdminResponse
             {
                 Id = c.Id,

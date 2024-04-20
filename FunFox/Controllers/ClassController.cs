@@ -34,10 +34,19 @@ namespace FunFox.Controllers
         [Authorize(Roles = nameof(Roles.Student))]
         public async Task<IActionResult> Enroll([FromQuery] int courseId)
         {
-            var enrollenmentRequest = new EnrollenmentRequest { CourseId = courseId, StudentId = identityUser.StudentId.Value};
+            var enrollenmentRequest = new EnrollenmentRequest { CourseId = courseId, StudentId = identityUser.StudentId.Value };
             var response = await mediator.Send(enrollenmentRequest);
 
             return Redirect($"/?{(response.Success ? "msg" : "err")}={response.Message}");
+        }
+
+        [HttpPost("Delete/{classId}")]
+        [Authorize(Roles = nameof(Roles.Admin))]
+        public async Task<IActionResult> DeleteClass(int classId)
+        {
+            var response = await mediator.Send(new DeleteClassRequest { Id = classId });
+
+            return Redirect($"/admin/classes?{(response.Success ? "msg" : "err")}={response.Message}");
         }
     }
 }

@@ -38,10 +38,16 @@
                         <td>@record.CreatedBy</td>
                         <td>@record.CreatedAt.ToString("F")</td>
                         <td>
-                            <a href="/admin/class/edit/@record.Id">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <i class="fa-solid fa-trash"></i>
+                            <div style="display: flex; gap: 10px">
+                                <a href="/admin/class/edit/@record.Id">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <form action="/class/delete/@record.Id" method="post" id="deleteForm-@record.Id">
+                                    <button type="submit" onclick='return DeleteClass(@record.Id);' class="deleteCode" style="background-color: transparent; border: none;">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                      </tr>
                  }
@@ -55,3 +61,24 @@
         </tbody>
     </table>
 </div>
+
+
+@section Scripts
+{
+    <script>
+
+        function DeleteClass(id) {
+
+            $.jAlert({
+                'title': 'Are you sure you want to delete this class',
+                'content': 'Are you sure you want to delete this class',
+                'btns': [
+                    { 'text': 'Yes', 'closeAlert': true, 'onClick': function () { $(`#deleteForm-${id}`).submit(); } },
+                    { 'text': 'No', 'closeAlert': true, 'onClick': function () { } }
+                ]
+            });
+
+            return false;
+        }
+    </script>
+}
