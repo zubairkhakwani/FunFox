@@ -14,11 +14,9 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                @if(ViewBag.SuccessMessage != null)
+                @if (ViewData["ShowErrorSummary"] != null)
                 {
-                    <div class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4 text-success">
-                        @ViewBag.SuccessMessage
-                    </div>
+                    <div asp-validation-summary="All" style="color: red"></div>
                 }
 
                 <form asp-controller="auth" asp-action="register" method="post" class="mx-1 mx-md-4">

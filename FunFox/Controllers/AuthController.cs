@@ -35,9 +35,16 @@ namespace FunFox.Controllers
             }
 
             var response = await mediator.Send(request);
-            ViewBag.SuccessMessage = "Registration Success";
 
-            return View();
+            if (!response.Success)
+            {
+                ViewData["ShowErrorSummary"] = true;
+                ModelState.AddModelError("error", response.Message);
+                return View();
+            }
+
+
+            return Redirect($"/Auth/login?msg={response.Message}");
         }
 
         [HttpGet("login")]

@@ -3,6 +3,10 @@
 
 // Write your JavaScript code.
 
+$(document).ready(function () {
+    ShowParamMessages();
+});
+
 function AjaxRequest(type = "GET", url, data) {
     return new Promise((resolve, reject) => {
         var result;

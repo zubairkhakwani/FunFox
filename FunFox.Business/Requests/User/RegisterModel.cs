@@ -16,13 +16,14 @@ namespace FunFox.Business.Requests.User
         public string Name { get; set; } = null!;
 
         [Required]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,})+)$", ErrorMessage = "Please enter correct email")]
         public string Email { get; set; } = null!;
 
         [Required]
         public string Password { get; set; } = null!;
 
         [Required]
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password), ErrorMessage = "Password and confirm password should be same")]
         public string ConfirmPassword { get; set; } = null!;
 
         [Required]
