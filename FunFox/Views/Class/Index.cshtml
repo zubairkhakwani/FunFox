@@ -4,7 +4,7 @@
 
     @foreach (var cls in Model.Records)
     {
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="width: 540px;">
           <div class="row g-0" style="height: 100%;">
             <div class="col-md-4">
               <img src="/@cls.Image" class="img-fluid rounded-start">
@@ -14,6 +14,7 @@
                 <h5 class="card-title">@cls.Title</h5>
                 <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 8px !important">@cls.DetailHTML</p>
                 <p class="card-text" style="margin-bottom: 8px !important"> Class Level: @cls.Level.ToString() </p>
+                <p class="card-text" style="margin-bottom: 8px !important"> Class Size / Remaining: @cls.ClassSize / @(cls.ClassSize - cls.StudentCount) </p>
                 <p class="card-text" style="margin-bottom: 8px !important"><small class="text-muted">Monday - Friday from @cls.ClassFrom - @cls.ClassTo</small></p>
                 
                 <div style="display:flex; gap: 10px; flex-wrap: wrap;">
@@ -24,7 +25,7 @@
                     else
                     {
                         <form action="/class/enroll?courseId=@cls.Id" method="post">
-                            <button type="submit" disabled="@(cls.StudentCount >= cls.ClassSize ? true : false)" title="@(cls.StudentCount >= cls.ClassSize ? "Class size is full" : "")" class="btn btn-primary">Enroll Now</button>
+                            <button type="submit" disabled="@(cls.StudentCount >= cls.ClassSize ? true : false)" class="btn btn-primary">@(cls.StudentCount >= cls.ClassSize ? "Class size is full" : "Enroll Now")</button>
                         </form>
                     }
                     <button class="btn btn-secondary">View Detail</button>
