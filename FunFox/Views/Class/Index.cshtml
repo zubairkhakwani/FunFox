@@ -10,12 +10,13 @@
               <img src="/@cls.Image" class="img-fluid rounded-start">
             </div>
             <div class="col-md-8">
-              <div class="card-body" style="position: relative; height:100%">
+              <div class="card-body" style="display:flex; flex-direction: column; height:100%">
                 <h5 class="card-title">@cls.Title</h5>
-                <p class="card-text">@cls.DetailHTML</p>
-                <p class="card-text"> Class Level: @cls.Level.ToString() </p>
-                <p class="card-text"><small class="text-muted">Monday - Friday from @cls.ClassFrom - @cls.ClassTo</small></p>
-                <div style="display:flex; gap: 10px; flex-wrap: wrap; position: absolute; bottom: 10px">
+                <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 8px !important">@cls.DetailHTML</p>
+                <p class="card-text" style="margin-bottom: 8px !important"> Class Level: @cls.Level.ToString() </p>
+                <p class="card-text" style="margin-bottom: 8px !important"><small class="text-muted">Monday - Friday from @cls.ClassFrom - @cls.ClassTo</small></p>
+                
+                <div style="display:flex; gap: 10px; flex-wrap: wrap;">
                     @if(cls.AlreadyEnrolled)
                     {
                         <button class="btn btn-primary">Already Enrolled</button>
