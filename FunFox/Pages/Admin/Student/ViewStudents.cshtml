@@ -2,6 +2,24 @@
 @model FunFox.Pages.Admin.Student.ViewStudentsModel
 
 
+<div style="display: flex; flex-wrap: wrap; align-items: end; gap: 15px">
+
+    <div>
+        <label style="margin-bottom: 10px">Class level:</label>
+        <select asp-for="ClassLevel" id="ClassLevel" name="ClassLevel" class="form-select">
+            <option value="0" selected>Open this select menu</option>
+            <option value="1">Kindergarten</option>
+            <option value="2">ElementarySchool</option>
+            <option value="3">MiddleSchool</option>
+            <option value="4">HighSchool</option>
+        </select>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" onclick="search()">Search</button>
+    </div>
+</div>
+
 <div>
     <table class="table table-striped">
         <thead>
@@ -36,3 +54,21 @@
         </tbody>
     </table>
 </div>
+
+
+@section Scripts
+{
+    <script>
+        function search()
+        {
+            var selectedLevel = document.getElementById("ClassLevel").value;
+
+            if (!selectedLevel || selectedLevel == '0' || selectedLevel == 0)
+            {
+                return;
+            }
+
+            window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + `?level=${selectedLevel}`;
+        }
+    </script>
+}

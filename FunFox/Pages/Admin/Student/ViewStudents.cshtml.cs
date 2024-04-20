@@ -15,6 +15,8 @@ namespace FunFox.Pages.Admin.Student
         private readonly IMediator mediator;
         public PageableResponse<GetStudentsResponse> PageableResponse { get; set; }
 
+        public ClassLevel? ClassLevel { get; set; }
+
         [FromQuery(Name = "msg")]
         public string Message { get; set; }
 
@@ -24,9 +26,10 @@ namespace FunFox.Pages.Admin.Student
             this.mediator = mediator;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(ClassLevel? level)
         {
-            PageableResponse = await mediator.Send(new GetStudentsRequest { });
+            ClassLevel = level;
+            PageableResponse = await mediator.Send(new GetStudentsRequest { ClassLevel = level });
 
         }
     }

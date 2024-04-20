@@ -61,7 +61,7 @@
 
         $(document).ready(function () {
             // Get the current URL
-            var currentUrl = window.location.href;
+            var currentUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
 
             // Iterate through each anchor tag with class list-group-item
             $('.list-group-item').each(function () {
