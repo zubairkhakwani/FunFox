@@ -15,8 +15,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color: orange; text:white">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color: orange; text:white; border-bottom: 1px solid #ee4462 !important;">
+            <div class="container-fluid" style="max-width: 1140px ;margin: 0 auto;">
                 <div>
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                         <img title="" style="height: 50px" alt="FunFox Program" src="https://www.funfoxprogram.com.au/Themes/WristwearTheme/Content/images/logo.png" usemap="#image_map">
@@ -29,10 +29,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Class" asp-action="Index">View Classes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="btn-highlight text-white" asp-area="" asp-controller="Class" asp-action="Index">View Classes</a>
                         </li>
                     </ul>
 
@@ -44,18 +41,18 @@
 
                                 @if(IdentityUser.IsInRole(Roles.Admin.ToString()))
                                 {
-                                    <a class="btn" style="background-color:#F38E3D" href="/admin/classes">Admin Panel</a>
+                                    <a class="btn" style="background-color:#F38E3D; color:white" href="/admin/classes">Admin Panel</a>
                                 }
 
                                 <form action="/auth/logout" method="post">
-                                    <button type="submit" class="btn" style="background-color: #EE4462">Logout</button>
+                                        <button type="submit" class="btn" style="background-color: #EE4462; color:white">Logout</button>
                                 </form>
                             </div>
                         }
                         else
                         {
-                            <a href="/auth/login" class="btn" style="background-color: #EE4462">Login</a>
-                            <a href="/auth/register" class="btn" style="background-color:#F38E3D">Register</a>
+                            <a href="/auth/login" class="btn" style="background-color: #EE4462; color:white">Login</a>
+                            <a href="/auth/register" class="btn" style="background-color:#F38E3D; color:white">Register</a>
                         }
 
                     </div>

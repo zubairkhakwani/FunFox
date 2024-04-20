@@ -18,7 +18,7 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-.main-small-heading {
+.h2-subtitle {
     position: relative;
     font-family: "JOST_BOLD", sans-serif !important;
     font-size: 22px;
@@ -30,10 +30,102 @@ html {
     display: inline-block;
 }
 
-.main-heading {
+.h2-title {
     font-family: /*"Jost", sans-serif !important*/ "JOST_BOLD", sans-serif;
     font-size: 55px;
     color: #f38e3d;
     font-weight: 900;
     line-height: 70px;
+}
+
+.main-course-category-low {
+    padding-top: 40px;
+    padding-bottom: 50px;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.course-category-title {
+    text-align: center;
+}
+
+.course-category-box {
+    border: solid 1px #acacac;
+    height: 150px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 30px;
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    transition: all 0.2s cubic-bezier(0.98, 0.57, 1, 1) 0s;
+}
+
+.course-category-icon {
+    margin-right: 20px;
+}
+
+.course-category-content {
+    text-align: left;
+    width: calc(100%);
+}
+
+.h3-title {
+    font-family: "JOST_BOLD", sans-serif !important;
+    font-size: 25px;
+    color: #ee4462;
+    line-height: 35px;
+    font-weight: 700;
+}
+
+.course-category-content .h3-title {
+    line-height: 25px;
+    transition: all 0.2s cubic-bezier(0.98, 0.57, 1, 1) 0s;
+}
+
+.btn-highlight {
+    background-color: #f38e3d;
+    width: 150px;
+    font-weight: bold;
+    padding: 15px;
+    border: 1px solid #f38e3d;
+    border-radius: 25px 28px 15px 34px;
+    box-shadow: 1px 2px 2px 2px #bcbcbc;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+
+.text-white {
+    color: #fff !important;
+}
+
+.main-banner::after {
+    content: "";
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    border-radius: 100%;
+    top: 37px;
+    right: -390px;
+    opacity: 0.5;
+    background: radial-gradient(ellipse at center, rgba(255, 82, 25, 0.6) 0%, rgba(255, 82, 25, 0.6) 0%, rgba(255, 82, 25, 0) 68%, rgba(255, 82, 25, 0) 100%);
+    background-image: radial-gradient(rgba(255, 82, 25, 0.6) 0%, rgba(255, 82, 25, 0.6) 0%, rgba(255, 82, 25, 0) 68%, rgba(255, 82, 25, 0) 100%);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    -webkit-background: radial-gradient(ellipse at center, rgba(255, 82, 25, 0.6) 0%, rgba(255, 82, 25, 0.6) 0%, rgba(255, 82, 25, 0) 68%, rgba(255, 82, 25, 0) 100%);
+    z-index: -5;
 }
