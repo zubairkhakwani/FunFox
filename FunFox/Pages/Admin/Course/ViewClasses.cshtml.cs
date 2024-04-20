@@ -14,10 +14,6 @@ namespace FunFox.Pages.Admin.Course
         private readonly IMediator mediator;
         public PageableResponse<GetClassesForAdminResponse> PageableResponse { get; set; }
 
-        [FromQuery(Name = "msg")]
-        public string Message { get; set; }
-
-
         public ViewClassesModel(IMediator mediator)
         {
             this.mediator = mediator;
