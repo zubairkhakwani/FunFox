@@ -24,6 +24,8 @@ namespace FunFox.Business.RequestHandlers.Class
                 .Include(c => c.CreatedBy)
                 .ThenInclude(sc => sc.Student)
                 .Where(c =>
+                    c.IsActive
+                    &&
                     (request.Id == null || c.Id == request.Id.Value)
                     &&
                     (string.IsNullOrWhiteSpace(request.Keyword) || c.Title.Contains(request.Keyword) || c.Level.ToString() == request.Keyword)
@@ -32,7 +34,6 @@ namespace FunFox.Business.RequestHandlers.Class
             var totalRecords = query.Count();
 
             var data = await query
-                .Where(c => c.IsActive)
             .Select(c => new GetClassesResponse
             {
                 Id = c.Id,

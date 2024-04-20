@@ -25,6 +25,11 @@
                         <span>Classes</span>
                     </a>
 
+                    <a href="/admin/students" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-money-bill fa-fw me-3"></i>
+                        <span>Students</span>
+                    </a>
+
                     <a href="/" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-money-bill fa-fw me-3"></i>
                         <span>View Portal</span>
@@ -43,6 +48,7 @@
     </main>
     <!--Main layout-->
 
+
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <script src="~/lib/jalert/jalert.js"></script>
     <script src="~/lib/jalert/jalert-functions.js"></script>
@@ -50,6 +56,30 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            // Get the current URL
+            var currentUrl = window.location.href;
+
+            // Iterate through each anchor tag with class list-group-item
+            $('.list-group-item').each(function () {
+                var href = $(this).attr('href');
+
+                // Check if the href ends with the current URL
+                if (href && currentUrl.endsWith(href)) {
+                    // Add 'active' class to the matching anchor tag
+                    $(this).addClass('active');
+                } else {
+                    // Remove 'active' class from non-matching anchor tags
+                    $(this).removeClass('active');
+                }
+            });
+        });
+
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -24,13 +24,14 @@ namespace FunFox.Business.RequestHandlers.Class
                 .Include(c => c.CreatedBy)
                 .ThenInclude(sc => sc.Student)
                 .Where(c =>
+                    c.IsActive
+                    &&
                     (string.IsNullOrWhiteSpace(request.Keyword) || c.Title.Contains(request.Keyword) || c.Level.ToString() == request.Keyword)
                 );
 
             var totalRecords = query.Count();
 
             var data = await query
-                .Where(c => c.IsActive)
             .Select(c => new GetClassesForAdminResponse
             {
                 Id = c.Id,
