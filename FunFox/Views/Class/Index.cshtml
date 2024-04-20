@@ -13,6 +13,7 @@
               <div class="card-body" style="position: relative; height:100%">
                 <h5 class="card-title">@cls.Title</h5>
                 <p class="card-text">@cls.DetailHTML</p>
+                <p class="card-text"> Class Level: @cls.Level.ToString() </p>
                 <p class="card-text"><small class="text-muted">Monday - Friday from @cls.ClassFrom - @cls.ClassTo</small></p>
                 <div style="display:flex; gap: 10px; flex-wrap: wrap; position: absolute; bottom: 10px">
                     @if(cls.AlreadyEnrolled)
